@@ -11,7 +11,29 @@
 <.list>
   <:item title="Store"><%= @store.store_id %></:item>
   <:item title="Location"><%= @store.location %></:item>
+  <:item :if={@store.products} title="Products">
+    <ul>
+      <%= Enum.map(@store.products, fn product -> %>
+        <li>
+          <div style="display: flex; align-items: center;">
+            <div style="flex: 1; height: 1px; background-color: black;"></div>
+            <h3 style="margin: 0 1em; font-size: 1.2em;"><strong><%= product.name %></strong></h3>
+            <div style="flex: 1; height: 1px; background-color: black;"></div>
+          </div>
+          <ul>
+            <li>&bull; Vendor: <%= product.vendor %></li>
+            <li>&bull; Inventory count: <%= product.inventory %></li>
+            <li>&bull; Retail price: <%= product.retail_price %></li>
+            <li>&bull; Wholesale price: <%= product.wholesale_price %></li>
+          </ul>
+        </li>
+      <% end) %>
+    </ul>
+  </:item>
 </.list>
+
+
+
 
 <.back navigate={~p"/stores"}>Back to stores</.back>
 
